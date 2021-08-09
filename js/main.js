@@ -63,7 +63,7 @@ const editDelete = nameOfItem => {
             const minuteSection = () => {
                 let minute = singleList.querySelector('.minute');
 
-                for (let m = 0; m < 59; m++) {
+                for (let m = 0; m < 60; m++) {
                     minute.options[minute.options.length] = new Option(m < 10 ? '0' + m : m, m);
                 }
             }
@@ -80,20 +80,19 @@ const editDelete = nameOfItem => {
 
                 let reminderTime = `${hourSelected}:${minuteSelected}`;
 
-                setInterval(() => {
-                    const currentTime = new Date();
-                    let hours = addZero(currentTime.getHours());
-                    let minutes = addZero(currentTime.getMinutes());
-                
+                const displayedReminderTime = () => {
+                    const currentDate = new Date();
+                    let hours = addZero(currentDate.getHours());
+                    let minutes = addZero(currentDate.getMinutes());
+
                     const time = `${hours}:${minutes}`;
-                
-                    clock.innerHTML = time;
 
                     if (reminderTime === time) {
-                        alert(nameOfItem);
+                        alert('REMINDER: ' + nameOfItem);
                     }
-                }, 1000);
-                
+                }
+
+                setInterval(displayedReminderTime, 1000);
             })
         }
     })
